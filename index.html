@@ -12,10 +12,13 @@
   --bg: #ffffff;
   --text: #27292d;
   --sub: #9aa0a8;
+
   --line: #e3e5e8;
-  --line-dark: #d5d8dc;
+  --line-dark: #cfd3d8;
+
   --hover: #f7f7f6;
   --mid: #f4f4f3;
+
   --dark: #27292d;
   --white: #ffffff;
 }
@@ -43,8 +46,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+
+  min-height: 100vh;
+  padding: 24px;
+}
+
 button,
-textarea,
 input {
   font: inherit;
 }
@@ -54,31 +64,31 @@ button {
   background: none;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 24px;
-}
-
 .widget {
   width: min(100%, 900px);
 }
+
+
+/* ==============================
+   HEADER
+============================== */
 
 .header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+
   gap: 20px;
+
   margin-bottom: 16px;
 }
 
-.title-group {
-  min-width: 0;
-}
+
+/* 제목 */
 
 .title-input {
-  width: 260px;
+
+  width: 300px;
   max-width: 60vw;
 
   padding: 2px 4px;
@@ -88,16 +98,17 @@ body {
   border-radius: 4px;
 
   background: transparent;
+
   color: var(--text);
 
   outline: none;
 
   font-size: 17px;
   font-weight: 600;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
 
-  cursor: text;
+  line-height: 1.4;
+
+  letter-spacing: -0.02em;
 }
 
 .title-input:hover {
@@ -109,16 +120,24 @@ body {
   border-color: var(--line-dark);
 }
 
+
+/* ==============================
+   STATS
+============================== */
+
 .stats {
   display: flex;
   align-items: center;
+
   gap: 14px;
+
   flex-shrink: 0;
 }
 
 .stat {
   display: flex;
   align-items: baseline;
+
   gap: 5px;
 }
 
@@ -129,6 +148,7 @@ body {
 
 .stat-value {
   color: var(--text);
+
   font-size: 13px;
   font-weight: 500;
 }
@@ -136,35 +156,62 @@ body {
 .divider {
   width: 1px;
   height: 12px;
+
   background: var(--line);
 }
+
+
+/* ==============================
+   PROGRESS
+============================== */
 
 .progress {
   width: 100%;
   height: 2px;
+
   margin-bottom: 18px;
+
   background: #f0f1f2;
 }
 
 .progress-fill {
   height: 100%;
   width: 0%;
+
   background: var(--dark);
-  transition: width 0.25s ease;
+
+  transition: width .25s ease;
 }
+
+
+/* ==============================
+   GRID
+============================== */
 
 .grid {
+
   display: grid;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(9, minmax(0, 1fr));
+
   gap: 3px;
+
 }
 
+
+/* ==============================
+   CELL
+============================== */
+
 .cell {
+
   position: relative;
+
   aspect-ratio: 1 / 1;
+
   min-width: 0;
 
-  padding: 8px;
   overflow: hidden;
 
   background: var(--white);
@@ -172,19 +219,17 @@ body {
   border: 1px solid var(--line);
   border-radius: 4px;
 
-  cursor: pointer;
-  text-align: left;
-  color: var(--text);
-
   transition:
     background .12s ease,
     border-color .12s ease;
 }
 
 .cell:hover {
-  background: var(--hover);
   border-color: var(--line-dark);
 }
+
+
+/* 핵심 목표 */
 
 .cell.mid {
   background: var(--mid);
@@ -192,102 +237,234 @@ body {
 }
 
 .cell.mid:hover {
-  background: #ededec;
+  background: #eeeeed;
 }
+
+
+/* 중심 목표 */
 
 .cell.main {
   background: var(--dark);
-  color: var(--white);
   border-color: var(--dark);
 }
 
 .cell.main:hover {
-  background: #1f2125;
+  background: #222428;
 }
+
+
+/* ==============================
+   NUMBER
+============================== */
 
 .number {
   position: absolute;
+
   top: 7px;
   left: 8px;
+
+  z-index: 2;
 
   color: var(--sub);
 
   font-size: 8px;
   font-weight: 500;
-  line-height: 1;
+
+  pointer-events: none;
 }
 
 .cell.main .number {
-  color: rgba(255,255,255,.45);
+  color: rgba(255,255,255,.48);
 }
 
-.cell-text {
+
+/* ==============================
+   INLINE TEXT INPUT
+============================== */
+
+.cell-input {
+
   position: absolute;
 
-  top: 50%;
-  left: 8px;
-  right: 8px;
+  inset: 0;
 
-  transform: translateY(-50%);
+  width: 100%;
+  height: 100%;
 
-  margin: 0;
+  padding:
+    24px
+    14px
+    22px;
+
+  border: 0;
+  outline: none;
+
+  background: transparent;
+
+  color: var(--text);
 
   text-align: center;
 
   font-size: 11px;
   font-weight: 400;
 
-  line-height: 1.45;
+  line-height: 1.4;
+
   letter-spacing: -0.02em;
 
-  word-break: keep-all;
-
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-
-  overflow: hidden;
+  cursor: text;
 }
 
-.cell.mid .cell-text {
+
+/* placeholder */
+
+.cell-input::placeholder {
+  color: transparent;
+}
+
+
+/* hover */
+
+.cell-input:hover {
+  background: rgba(0,0,0,.012);
+}
+
+
+/* focus */
+
+.cell-input:focus {
+  box-shadow:
+    inset 0 0 0 1px var(--line-dark);
+}
+
+
+/* 핵심 목표 */
+
+.cell.mid .cell-input {
   font-weight: 500;
 }
 
-.cell.main .cell-text {
+
+/* 중심 목표 */
+
+.cell.main .cell-input {
+
+  color: var(--white);
+
   font-size: 12px;
   font-weight: 600;
 }
 
-.status {
+.cell.main .cell-input:focus {
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.45);
+}
+
+
+/* 완료된 텍스트 */
+
+.cell.completed .cell-input {
+  opacity: .48;
+}
+
+
+/* ==============================
+   CHECK TOGGLE
+============================== */
+
+.check-area {
+
   position: absolute;
 
-  right: 7px;
-  bottom: 7px;
+  right: 4px;
+  bottom: 4px;
 
-  width: 5px;
-  height: 5px;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 25px;
+  height: 25px;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  border-radius: 50%;
+}
+
+
+/* 실제 원 */
+
+.check-dot {
+
+  width: 11px;
+  height: 11px;
+
+  border: 1.4px solid #b9bec5;
 
   border-radius: 50%;
 
-  background: transparent;
-  border: 1px solid #c9cdd2;
+  background: var(--white);
+
+  transition:
+    background .12s ease,
+    border-color .12s ease,
+    transform .12s ease;
 }
 
-.status.done {
+
+/* hover */
+
+.check-area:hover .check-dot {
+
+  border-color: var(--dark);
+
+  transform: scale(1.12);
+}
+
+
+/* 완료 */
+
+.check-area.done .check-dot {
+
   background: var(--dark);
+
   border-color: var(--dark);
 }
 
-.cell.main .status {
-  border-color: rgba(255,255,255,.45);
+
+/* 중앙 셀 */
+
+.cell.main .check-dot {
+
+  background: transparent;
+
+  border-color:
+    rgba(255,255,255,.48);
 }
 
-.cell.main .status.done {
-  background: var(--white);
+.cell.main .check-area:hover .check-dot {
+
   border-color: var(--white);
 }
 
+.cell.main .check-area.done .check-dot {
+
+  background: var(--white);
+
+  border-color: var(--white);
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
 .footer {
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -308,6 +485,7 @@ body {
 }
 
 .btn {
+
   padding: 5px 8px;
 
   border-radius: 4px;
@@ -324,164 +502,10 @@ body {
   color: var(--text);
 }
 
-.modal-bg {
-  position: fixed;
-  inset: 0;
 
-  z-index: 100;
-
-  display: none;
-
-  align-items: center;
-  justify-content: center;
-
-  padding: 20px;
-
-  background: rgba(15,15,15,.12);
-}
-
-.modal-bg.show {
-  display: flex;
-}
-
-.modal {
-  width: min(100%, 380px);
-
-  background: var(--white);
-
-  border: 1px solid #dcdfe3;
-  border-radius: 8px;
-
-  box-shadow:
-    0 8px 24px rgba(15,15,15,.08),
-    0 1px 4px rgba(15,15,15,.05);
-
-  overflow: hidden;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  min-height: 44px;
-
-  padding: 0 14px;
-
-  border-bottom: 1px solid var(--line);
-}
-
-.modal-title {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.close {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 26px;
-  height: 26px;
-
-  border-radius: 4px;
-
-  color: #8d9299;
-
-  cursor: pointer;
-}
-
-.close:hover {
-  background: var(--hover);
-}
-
-.modal-body {
-  padding: 14px;
-}
-
-textarea {
-  width: 100%;
-  height: 110px;
-
-  resize: none;
-
-  padding: 10px;
-
-  color: var(--text);
-  background: var(--white);
-
-  border: 1px solid var(--line);
-  border-radius: 4px;
-
-  outline: none;
-
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-textarea:focus {
-  border-color: #b5bac0;
-}
-
-.check-row {
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  margin-top: 12px;
-
-  color: #62666d;
-
-  font-size: 11px;
-
-  cursor: pointer;
-}
-
-.check-row input {
-  width: 14px;
-  height: 14px;
-
-  margin: 0;
-
-  accent-color: var(--dark);
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-
-  gap: 5px;
-
-  padding: 10px 14px;
-
-  border-top: 1px solid var(--line);
-}
-
-.modal-btn {
-  padding: 6px 10px;
-
-  border-radius: 4px;
-
-  color: #72767e;
-
-  font-size: 11px;
-
-  cursor: pointer;
-}
-
-.modal-btn:hover {
-  background: var(--hover);
-}
-
-.modal-btn.primary {
-  background: var(--dark);
-  color: var(--white);
-}
-
-.modal-btn.primary:hover {
-  background: #1f2125;
-}
+/* ==============================
+   RESPONSIVE
+============================== */
 
 @media (max-width: 720px) {
 
@@ -489,49 +513,50 @@ textarea:focus {
     padding: 14px;
   }
 
-  .cell {
-    padding: 5px;
-    border-radius: 3px;
-  }
+  .cell-input {
 
-  .cell-text {
-    left: 5px;
-    right: 5px;
+    padding:
+      19px
+      7px
+      18px;
 
     font-size: 9px;
-    line-height: 1.35;
-
-    -webkit-line-clamp: 3;
   }
 
-  .cell.main .cell-text {
+  .cell.main .cell-input {
     font-size: 10px;
   }
 
   .number {
-    top: 4px;
-    left: 5px;
+
+    top: 5px;
+    left: 6px;
 
     font-size: 7px;
   }
 
-  .status {
-    right: 4px;
-    bottom: 4px;
+  .check-area {
 
-    width: 4px;
-    height: 4px;
+    width: 21px;
+    height: 21px;
+
+    right: 2px;
+    bottom: 2px;
   }
+
+  .check-dot {
+
+    width: 9px;
+    height: 9px;
+  }
+
 }
+
 
 @media (max-width: 480px) {
 
   body {
     padding: 8px;
-  }
-
-  .header {
-    align-items: flex-start;
   }
 
   .stats {
@@ -545,10 +570,12 @@ textarea:focus {
   .grid {
     gap: 2px;
   }
+
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -556,18 +583,15 @@ textarea:focus {
 
   <header class="header">
 
-    <div class="title-group">
+    <input
+      id="widgetTitle"
+      class="title-input"
+      type="text"
+      value="만다라트"
+      maxlength="40"
+      aria-label="제목"
+    >
 
-      <input
-        id="widgetTitle"
-        class="title-input"
-        type="text"
-        value="만다라트"
-        maxlength="40"
-        aria-label="만다라트 제목"
-      >
-
-    </div>
 
     <div class="stats">
 
@@ -578,14 +602,18 @@ textarea:focus {
         </span>
 
         <span
-          class="stat-value"
-          id="doneCount">
+          id="doneCount"
+          class="stat-value">
+
           0 / 73
+
         </span>
 
       </div>
 
+
       <div class="divider"></div>
+
 
       <div class="stat">
 
@@ -594,9 +622,11 @@ textarea:focus {
         </span>
 
         <span
-          class="stat-value"
-          id="percentValue">
+          id="percentValue"
+          class="stat-value">
+
           0%
+
         </span>
 
       </div>
@@ -605,25 +635,29 @@ textarea:focus {
 
   </header>
 
+
   <div class="progress">
 
     <div
-      class="progress-fill"
-      id="progressFill">
+      id="progressFill"
+      class="progress-fill">
     </div>
 
   </div>
 
+
   <div
-    class="grid"
-    id="grid">
+    id="grid"
+    class="grid">
   </div>
+
 
   <footer class="footer">
 
     <div class="help">
-      클릭하여 수정
+      텍스트 클릭하여 바로 수정 · 우측 하단 원을 클릭하여 완료
     </div>
+
 
     <div class="actions">
 
@@ -634,6 +668,7 @@ textarea:focus {
         체크 초기화
 
       </button>
+
 
       <button
         class="btn"
@@ -649,77 +684,21 @@ textarea:focus {
 
 </div>
 
-<div
-  class="modal-bg"
-  id="modalBg">
 
-  <div class="modal">
-
-    <div class="modal-header">
-
-      <div
-        class="modal-title"
-        id="modalTitle">
-
-        목표 수정
-
-      </div>
-
-      <button
-        class="close"
-        id="closeModal">
-
-        ×
-
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <textarea
-        id="goalInput"
-        placeholder="목표를 입력하세요."></textarea>
-
-      <label class="check-row">
-
-        <input
-          type="checkbox"
-          id="doneInput">
-
-        완료
-
-      </label>
-
-    </div>
-
-    <div class="modal-footer">
-
-      <button
-        class="modal-btn"
-        id="cancel">
-
-        취소
-
-      </button>
-
-      <button
-        class="modal-btn primary"
-        id="save">
-
-        저장
-
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
 
 <script>
 
-const STORAGE_KEY = "mandalart_notion_v3";
+/* ==============================
+   STORAGE
+============================== */
+
+const STORAGE_KEY =
+  "mandalart_notion_v4";
+
+
+/* ==============================
+   DEFAULT
+============================== */
 
 const defaultData = {
 
@@ -730,27 +709,37 @@ const defaultData = {
     done: false
   },
 
-  midGoals: Array.from(
-    { length: 8 },
-    () => ({
-      text: "",
-      done: false
-    })
-  ),
+  midGoals:
+    Array.from(
+      { length: 8 },
 
-  details: Array.from(
-    { length: 8 },
-    () =>
-      Array.from(
-        { length: 8 },
-        () => ({
-          text: "",
-          done: false
-        })
-      )
-  )
+      () => ({
+        text: "",
+        done: false
+      })
+    ),
+
+  details:
+    Array.from(
+      { length: 8 },
+
+      () =>
+        Array.from(
+          { length: 8 },
+
+          () => ({
+            text: "",
+            done: false
+          })
+        )
+    )
 
 };
+
+
+/* ==============================
+   POSITION
+============================== */
 
 const CENTER_MIDS = {
 
@@ -767,6 +756,7 @@ const CENTER_MIDS = {
 
 };
 
+
 const OUTER_MIDS = {
 
   "1,1":0,
@@ -781,6 +771,7 @@ const OUTER_MIDS = {
   "7,7":7
 
 };
+
 
 const BLOCK_GROUP = {
 
@@ -797,6 +788,7 @@ const BLOCK_GROUP = {
 
 };
 
+
 const DETAIL_POS = {
 
   "0,0":0,
@@ -812,34 +804,22 @@ const DETAIL_POS = {
 
 };
 
+
+/* ==============================
+   STATE
+============================== */
+
 let state = load();
-let active = null;
 
-const widgetTitle =
-  document.getElementById("widgetTitle");
 
-widgetTitle.value =
-  state.title || "만다라트";
-
-widgetTitle.addEventListener(
-  "input",
-  () => {
-
-    state.title =
-      widgetTitle.value;
-
-    save();
-
-  }
-);
-
-function deepClone(obj) {
+function clone(obj) {
 
   return JSON.parse(
     JSON.stringify(obj)
   );
 
 }
+
 
 function load() {
 
@@ -850,16 +830,20 @@ function load() {
         STORAGE_KEY
       );
 
-    if(saved)
+    if(saved) {
+
       return JSON.parse(saved);
+
+    }
 
   }
 
-  catch(e){}
+  catch(e) {}
 
-  return deepClone(defaultData);
+  return clone(defaultData);
 
 }
+
 
 function save() {
 
@@ -870,10 +854,44 @@ function save() {
 
 }
 
+
+/* ==============================
+   TITLE
+============================== */
+
+const widgetTitle =
+  document.getElementById(
+    "widgetTitle"
+  );
+
+
+widgetTitle.value =
+  state.title || "만다라트";
+
+
+widgetTitle.addEventListener(
+  "input",
+
+  () => {
+
+    state.title =
+      widgetTitle.value;
+
+    save();
+
+  }
+);
+
+
+/* ==============================
+   DESCRIPTOR
+============================== */
+
 function descriptor(row,col) {
 
   const key =
     `${row},${col}`;
+
 
   if(row === 4 && col === 4) {
 
@@ -883,35 +901,52 @@ function descriptor(row,col) {
 
   }
 
-  if(CENTER_MIDS[key] !== undefined) {
+
+  if(
+    CENTER_MIDS[key]
+    !== undefined
+  ) {
 
     return {
+
       type:"mid",
       index:CENTER_MIDS[key]
+
     };
 
   }
 
-  if(OUTER_MIDS[key] !== undefined) {
+
+  if(
+    OUTER_MIDS[key]
+    !== undefined
+  ) {
 
     return {
+
       type:"mid",
       index:OUTER_MIDS[key]
+
     };
 
   }
+
 
   const blockRow =
     Math.floor(row / 3);
 
+
   const blockCol =
     Math.floor(col / 3);
+
 
   const block =
     `${blockRow},${blockCol}`;
 
+
   const group =
     BLOCK_GROUP[block];
+
 
   if(group !== undefined) {
 
@@ -921,56 +956,98 @@ function descriptor(row,col) {
     const lc =
       col % 3;
 
+
     const local =
       `${lr},${lc}`;
+
 
     const index =
       DETAIL_POS[local];
 
+
     if(index !== undefined) {
 
       return {
+
         type:"detail",
         group,
         index
+
       };
 
     }
 
   }
 
+
   return null;
 
 }
 
+
+/* ==============================
+   DATA ITEM
+============================== */
+
 function getItem(d) {
 
-  if(d.type === "main")
+  if(d.type === "main") {
+
     return state.main;
 
-  if(d.type === "mid")
-    return state.midGoals[d.index];
+  }
 
-  return state.details[d.group][d.index];
+
+  if(d.type === "mid") {
+
+    return state
+      .midGoals[d.index];
+
+  }
+
+
+  return state
+    .details[d.group][d.index];
 
 }
+
+
+/* ==============================
+   CELL
+============================== */
 
 function createCell(d) {
 
   const item =
     getItem(d);
 
+
   const cell =
-    document.createElement("button");
+    document.createElement("div");
+
 
   cell.className =
     `cell ${d.type}`;
 
+
+  if(item.done) {
+
+    cell.classList.add(
+      "completed"
+    );
+
+  }
+
+
+  /* NUMBER */
+
   const number =
     document.createElement("span");
 
+
   number.className =
     "number";
+
 
   if(d.type === "main") {
 
@@ -987,45 +1064,162 @@ function createCell(d) {
 
   }
 
-  const text =
-    document.createElement("div");
 
-  text.className =
-    "cell-text";
+  /* INPUT */
 
-  text.textContent =
+  const input =
+    document.createElement("input");
+
+
+  input.type =
+    "text";
+
+
+  input.className =
+    "cell-input";
+
+
+  input.value =
     item.text;
 
-  const status =
-    document.createElement("div");
 
-  status.className =
-    `status ${item.done ? "done":""}`;
+  input.maxLength =
+    40;
+
+
+  input.setAttribute(
+    "aria-label",
+    "목표 입력"
+  );
+
+
+  input.addEventListener(
+    "input",
+
+    () => {
+
+      item.text =
+        input.value;
+
+      save();
+
+    }
+  );
+
+
+  input.addEventListener(
+    "keydown",
+
+    e => {
+
+      if(e.key === "Enter") {
+
+        input.blur();
+
+      }
+
+    }
+  );
+
+
+  /* CHECK */
+
+  const check =
+    document.createElement("button");
+
+
+  check.type =
+    "button";
+
+
+  check.className =
+    `check-area ${
+      item.done
+        ? "done"
+        : ""
+    }`;
+
+
+  check.setAttribute(
+    "aria-label",
+    item.done
+      ? "완료 취소"
+      : "완료"
+  );
+
+
+  const dot =
+    document.createElement("span");
+
+
+  dot.className =
+    "check-dot";
+
+
+  check.appendChild(dot);
+
+
+  check.addEventListener(
+    "click",
+
+    e => {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+
+      item.done =
+        !item.done;
+
+
+      save();
+
+      render();
+
+    }
+  );
+
 
   cell.appendChild(number);
-  cell.appendChild(text);
-  cell.appendChild(status);
 
-  cell.onclick =
-    () => openModal(d);
+  cell.appendChild(input);
+
+  cell.appendChild(check);
+
 
   return cell;
 
 }
 
+
+/* ==============================
+   RENDER
+============================== */
+
 const grid =
   document.getElementById("grid");
+
 
 function render() {
 
   grid.innerHTML = "";
 
-  for(let row = 0; row < 9; row++) {
 
-    for(let col = 0; col < 9; col++) {
+  for(
+    let row = 0;
+    row < 9;
+    row++
+  ) {
+
+    for(
+      let col = 0;
+      col < 9;
+      col++
+    ) {
 
       const d =
         descriptor(row,col);
+
 
       if(d) {
 
@@ -1039,245 +1233,191 @@ function render() {
 
   }
 
+
   updateProgress();
 
 }
 
+
+/* ==============================
+   PROGRESS
+============================== */
+
 function updateProgress() {
 
-  let total = 73;
+  const total = 73;
+
   let done = 0;
 
-  if(state.main.done)
+
+  if(state.main.done) {
+
     done++;
 
-  state.midGoals.forEach(
-    x => {
+  }
 
-      if(x.done)
+
+  state.midGoals.forEach(
+    item => {
+
+      if(item.done)
         done++;
 
     }
   );
 
+
   state.details.forEach(
     group =>
 
       group.forEach(
-        x => {
+        item => {
 
-          if(x.done)
+          if(item.done)
             done++;
 
         }
       )
+
   );
+
 
   const percent =
     Math.round(
       done / total * 100
     );
 
+
   document
-    .getElementById("doneCount")
+    .getElementById(
+      "doneCount"
+    )
     .textContent =
       `${done} / ${total}`;
 
+
   document
-    .getElementById("percentValue")
+    .getElementById(
+      "percentValue"
+    )
     .textContent =
       `${percent}%`;
 
+
   document
-    .getElementById("progressFill")
+    .getElementById(
+      "progressFill"
+    )
     .style.width =
       `${percent}%`;
 
 }
 
-const modalBg =
-  document.getElementById("modalBg");
 
-const goalInput =
-  document.getElementById("goalInput");
+/* ==============================
+   RESET CHECK
+============================== */
 
-const doneInput =
-  document.getElementById("doneInput");
+document
+  .getElementById(
+    "resetCheck"
+  )
+  .addEventListener(
+    "click",
 
-const modalTitle =
-  document.getElementById("modalTitle");
+    () => {
 
-function openModal(d) {
+      if(
+        !confirm(
+          "완료 표시를 모두 초기화할까요?"
+        )
+      ) {
 
-  active = d;
+        return;
 
-  const item =
-    getItem(d);
+      }
 
-  if(d.type === "main") {
 
-    modalTitle.textContent =
-      "중심 목표";
+      state.main.done =
+        false;
 
-  }
 
-  else if(d.type === "mid") {
+      state.midGoals.forEach(
+        item => {
 
-    modalTitle.textContent =
-      `핵심 목표 ${d.index + 1}`;
+          item.done =
+            false;
 
-  }
+        }
+      );
 
-  else {
 
-    modalTitle.textContent =
-      `세부 목표 ${d.index + 1}`;
+      state.details.forEach(
+        group =>
 
-  }
+          group.forEach(
+            item => {
 
-  goalInput.value =
-    item.text;
+              item.done =
+                false;
 
-  doneInput.checked =
-    item.done;
+            }
+          )
 
-  modalBg.classList.add("show");
+      );
 
-  requestAnimationFrame(
-    () => goalInput.focus()
+
+      save();
+
+      render();
+
+    }
   );
 
-}
 
-function closeModal() {
-
-  modalBg.classList.remove("show");
-  active = null;
-
-}
-
-function saveModal() {
-
-  if(!active)
-    return;
-
-  const item =
-    getItem(active);
-
-  item.text =
-    goalInput.value.trim();
-
-  item.done =
-    doneInput.checked;
-
-  save();
-  render();
-  closeModal();
-
-}
+/* ==============================
+   RESET ALL
+============================== */
 
 document
-  .getElementById("save")
-  .onclick =
-    saveModal;
+  .getElementById(
+    "resetAll"
+  )
+  .addEventListener(
+    "click",
 
-document
-  .getElementById("cancel")
-  .onclick =
-    closeModal;
+    () => {
 
-document
-  .getElementById("closeModal")
-  .onclick =
-    closeModal;
-
-modalBg.onclick =
-  e => {
-
-    if(e.target === modalBg)
-      closeModal();
-
-  };
-
-document
-  .getElementById("resetCheck")
-  .onclick =
-  () => {
-
-    if(
-      !confirm(
-        "완료 표시를 모두 초기화할까요?"
-      )
-    )
-      return;
-
-    state.main.done = false;
-
-    state.midGoals.forEach(
-      x => x.done = false
-    );
-
-    state.details.forEach(
-      group =>
-
-        group.forEach(
-          x => x.done = false
+      if(
+        !confirm(
+          "제목, 목표, 완료 상태를 모두 초기화할까요?"
         )
+      ) {
 
-    );
+        return;
 
-    save();
-    render();
+      }
 
-  };
 
-document
-  .getElementById("resetAll")
-  .onclick =
-  () => {
+      state =
+        clone(defaultData);
 
-    if(
-      !confirm(
-        "모든 내용을 초기화할까요?"
-      )
-    )
-      return;
 
-    state =
-      deepClone(defaultData);
+      widgetTitle.value =
+        state.title;
 
-    widgetTitle.value =
-      state.title;
 
-    save();
-    render();
+      save();
 
-  };
-
-document.addEventListener(
-  "keydown",
-  e => {
-
-    if(e.key === "Escape") {
-
-      closeModal();
+      render();
 
     }
+  );
 
-    if(
-      e.key === "Enter"
-      &&
-      (e.ctrlKey || e.metaKey)
-      &&
-      modalBg.classList.contains("show")
-    ) {
 
-      saveModal();
-
-    }
-
-  }
-);
+/* ==============================
+   INITIAL RENDER
+============================== */
 
 render();
 
