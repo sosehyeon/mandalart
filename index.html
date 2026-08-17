@@ -51,7 +51,7 @@ body {
   justify-content: center;
 
   min-height: 100vh;
-  padding: 24px;
+  padding: 18px;
 }
 
 button,
@@ -75,49 +75,12 @@ button {
 
 .header {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
 
-  gap: 20px;
+  min-height: 22px;
 
-  margin-bottom: 16px;
-}
-
-
-/* 제목 */
-
-.title-input {
-
-  width: 300px;
-  max-width: 60vw;
-
-  padding: 2px 4px;
-  margin-left: -4px;
-
-  border: 1px solid transparent;
-  border-radius: 4px;
-
-  background: transparent;
-
-  color: var(--text);
-
-  outline: none;
-
-  font-size: 17px;
-  font-weight: 600;
-
-  line-height: 1.4;
-
-  letter-spacing: -0.02em;
-}
-
-.title-input:hover {
-  background: var(--hover);
-}
-
-.title-input:focus {
-  background: var(--white);
-  border-color: var(--line-dark);
+  margin-bottom: 10px;
 }
 
 
@@ -143,7 +106,9 @@ button {
 
 .stat-label {
   color: var(--sub);
+
   font-size: 10px;
+  font-weight: 400;
 }
 
 .stat-value {
@@ -189,14 +154,12 @@ button {
 ============================== */
 
 .grid {
-
   display: grid;
 
   grid-template-columns:
     repeat(9, minmax(0, 1fr));
 
   gap: 3px;
-
 }
 
 
@@ -205,7 +168,6 @@ button {
 ============================== */
 
 .cell {
-
   position: relative;
 
   aspect-ratio: 1 / 1;
@@ -270,6 +232,8 @@ button {
   font-size: 8px;
   font-weight: 500;
 
+  line-height: 1;
+
   pointer-events: none;
 }
 
@@ -279,11 +243,10 @@ button {
 
 
 /* ==============================
-   INLINE TEXT INPUT
+   INLINE INPUT
 ============================== */
 
 .cell-input {
-
   position: absolute;
 
   inset: 0;
@@ -315,40 +278,24 @@ button {
   cursor: text;
 }
 
-
-/* placeholder */
-
 .cell-input::placeholder {
   color: transparent;
 }
 
-
-/* hover */
-
 .cell-input:hover {
   background: rgba(0,0,0,.012);
 }
-
-
-/* focus */
 
 .cell-input:focus {
   box-shadow:
     inset 0 0 0 1px var(--line-dark);
 }
 
-
-/* 핵심 목표 */
-
 .cell.mid .cell-input {
   font-weight: 500;
 }
 
-
-/* 중심 목표 */
-
 .cell.main .cell-input {
-
   color: var(--white);
 
   font-size: 12px;
@@ -361,23 +308,22 @@ button {
 }
 
 
-/* 완료된 텍스트 */
+/* 완료된 항목 */
 
 .cell.completed .cell-input {
-  opacity: .48;
+  opacity: .45;
 }
 
 
 /* ==============================
-   CHECK TOGGLE
+   CHECK
 ============================== */
 
 .check-area {
-
   position: absolute;
 
-  right: 4px;
-  bottom: 4px;
+  right: 3px;
+  bottom: 3px;
 
   z-index: 10;
 
@@ -385,8 +331,8 @@ button {
   align-items: center;
   justify-content: center;
 
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
 
   padding: 0;
 
@@ -395,15 +341,11 @@ button {
   border-radius: 50%;
 }
 
-
-/* 실제 원 */
-
 .check-dot {
+  width: 12px;
+  height: 12px;
 
-  width: 11px;
-  height: 11px;
-
-  border: 1.4px solid #b9bec5;
+  border: 1.5px solid #b6bbc2;
 
   border-radius: 50%;
 
@@ -415,23 +357,14 @@ button {
     transform .12s ease;
 }
 
-
-/* hover */
-
 .check-area:hover .check-dot {
-
   border-color: var(--dark);
 
   transform: scale(1.12);
 }
 
-
-/* 완료 */
-
 .check-area.done .check-dot {
-
   background: var(--dark);
-
   border-color: var(--dark);
 }
 
@@ -439,22 +372,18 @@ button {
 /* 중앙 셀 */
 
 .cell.main .check-dot {
-
   background: transparent;
 
   border-color:
-    rgba(255,255,255,.48);
+    rgba(255,255,255,.52);
 }
 
 .cell.main .check-area:hover .check-dot {
-
   border-color: var(--white);
 }
 
 .cell.main .check-area.done .check-dot {
-
   background: var(--white);
-
   border-color: var(--white);
 }
 
@@ -464,19 +393,20 @@ button {
 ============================== */
 
 .footer {
-
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   gap: 16px;
 
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .help {
   color: var(--sub);
+
   font-size: 10px;
+  font-weight: 400;
 }
 
 .actions {
@@ -485,7 +415,6 @@ button {
 }
 
 .btn {
-
   padding: 5px 8px;
 
   border-radius: 4px;
@@ -510,11 +439,10 @@ button {
 @media (max-width: 720px) {
 
   body {
-    padding: 14px;
+    padding: 12px;
   }
 
   .cell-input {
-
     padding:
       19px
       7px
@@ -528,7 +456,6 @@ button {
   }
 
   .number {
-
     top: 5px;
     left: 6px;
 
@@ -536,18 +463,16 @@ button {
   }
 
   .check-area {
+    width: 23px;
+    height: 23px;
 
-    width: 21px;
-    height: 21px;
-
-    right: 2px;
-    bottom: 2px;
+    right: 1px;
+    bottom: 1px;
   }
 
   .check-dot {
-
-    width: 9px;
-    height: 9px;
+    width: 10px;
+    height: 10px;
   }
 
 }
@@ -583,16 +508,6 @@ button {
 
   <header class="header">
 
-    <input
-      id="widgetTitle"
-      class="title-input"
-      type="text"
-      value="만다라트"
-      maxlength="40"
-      aria-label="제목"
-    >
-
-
     <div class="stats">
 
       <div class="stat">
@@ -611,9 +526,7 @@ button {
 
       </div>
 
-
       <div class="divider"></div>
-
 
       <div class="stat">
 
@@ -655,7 +568,7 @@ button {
   <footer class="footer">
 
     <div class="help">
-      텍스트 클릭하여 바로 수정 · 우측 하단 원을 클릭하여 완료
+      칸을 클릭하여 입력 · 우측 하단 원을 클릭하여 완료
     </div>
 
 
@@ -693,7 +606,7 @@ button {
 ============================== */
 
 const STORAGE_KEY =
-  "mandalart_notion_v4";
+  "mandalart_notion_v5";
 
 
 /* ==============================
@@ -701,8 +614,6 @@ const STORAGE_KEY =
 ============================== */
 
 const defaultData = {
-
-  title: "만다라트",
 
   main: {
     text: "",
@@ -853,34 +764,6 @@ function save() {
   );
 
 }
-
-
-/* ==============================
-   TITLE
-============================== */
-
-const widgetTitle =
-  document.getElementById(
-    "widgetTitle"
-  );
-
-
-widgetTitle.value =
-  state.title || "만다라트";
-
-
-widgetTitle.addEventListener(
-  "input",
-
-  () => {
-
-    state.title =
-      widgetTitle.value;
-
-    save();
-
-  }
-);
 
 
 /* ==============================
@@ -1390,7 +1273,7 @@ document
 
       if(
         !confirm(
-          "제목, 목표, 완료 상태를 모두 초기화할까요?"
+          "모든 목표와 완료 상태를 초기화할까요?"
         )
       ) {
 
@@ -1403,10 +1286,6 @@ document
         clone(defaultData);
 
 
-      widgetTitle.value =
-        state.title;
-
-
       save();
 
       render();
@@ -1416,7 +1295,7 @@ document
 
 
 /* ==============================
-   INITIAL RENDER
+   START
 ============================== */
 
 render();
